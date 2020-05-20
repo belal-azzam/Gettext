@@ -9,3 +9,6 @@ composer.lock
 
 # PhpStorm-specific files
 /.idea/
+/src/index.php
+/src/1.php
+/src/1.po
