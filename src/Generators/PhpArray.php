@@ -11,6 +11,7 @@ class PhpArray extends Generator implements GeneratorInterface
 
     public static $options = [
         'includeHeaders' => true,
+        'test'
     ];
 
     /**
