@@ -1,5 +1,5 @@
 {
-    "name": "gettext/gettext-bilal-azzam",
+    "name": "gettext-bilal-azzam/gettext",
     "type": "library",
     "description": "PHP gettext manager",
     "keywords": ["js", "gettext", "i18n", "translation", "po", "mo"],
