@@ -76,29 +76,51 @@ trait MultidimensionalArrayTrait
      */
     protected static function fromArray(array $messages, Translations $translations)
     {
-        if (!empty($messages['domain'])) {
-            $translations->setDomain($messages['domain']);
-        }
 
-        if (!empty($messages['plural-forms'])) {
-            $translations->setHeader(Translations::HEADER_PLURAL, $messages['plural-forms']);
-        }
 
-        foreach ($messages['messages'] as $context => $contextTranslations) {
-            foreach ($contextTranslations as $original => $value) {
-                if ($context === '' && $original === '') {
-                    static::extractHeaders(is_array($value) ? array_shift($value) : $value, $translations);
-                    continue;
-                }
+//        if(!isset($messages['messages']) && !empty($messages)) {
+//            $messages['messages'] = $messages;
+//        }
+//        if (!empty($messages['domain'])) {
+//            $translations->setDomain($messages['domain']);
+//        }
+//
+//        if (!empty($messages['plural-forms'])) {
+//            $translations->setHeader(Translations::HEADER_PLURAL, $messages['plural-forms']);
+//        }
 
-                $translation = $translations->insert($context, $original);
+//        foreach ($messages['messages'] as $context => $contextTranslations) {
+//            foreach ($contextTranslations as $original => $value) {
+//                if ($context === '' && $original === '') {
+//                    static::extractHeaders(is_array($value) ? array_shift($value) : $value, $translations);
+//                    continue;
+//                }
+//
+//                $translation = $translations->insert($context, $original);
+//
+//                if (is_array($value)) {
+//                    $translation->setTranslation(array_shift($value));
+//                    $translation->setPluralTranslations($value);
+//                } else {
+//                    $translation->setTranslation($value);
+//                }
+//            }
+//        }
 
-                if (is_array($value)) {
-                    $translation->setTranslation(array_shift($value));
-                    $translation->setPluralTranslations($value);
-                } else {
-                    $translation->setTranslation($value);
-                }
+        foreach ($messages as $original => $value) {
+            $context = '';
+            if ($context === '' && $original === '') {
+                static::extractHeaders(is_array($value) ? array_shift($value) : $value, $translations);
+                continue;
+            }
+
+            $translation = $translations->insert($context, $original);
+
+            if (is_array($value)) {
+                $translation->setTranslation(array_shift($value));
+                $translation->setPluralTranslations($value);
+            } else {
+                $translation->setTranslation($value);
             }
         }
     }
