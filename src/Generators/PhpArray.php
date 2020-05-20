@@ -35,6 +35,6 @@ class PhpArray extends Generator implements GeneratorInterface
     {
         $options += static::$options;
 
-        return static::toArray($translations, $options['includeHeaders'], true);
+        return static::toArray($translations, $options['includeHeaders'],  $options['forceArray'], $options['onlyMessages']);
     }
 }

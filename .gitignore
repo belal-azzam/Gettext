@@ -9,3 +9,7 @@ composer.lock
 
 # PhpStorm-specific files
 /.idea/
+tests/snapshots/
+src/index.php
+src/1.po
+src/1.php

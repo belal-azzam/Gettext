@@ -22,7 +22,7 @@ trait MultidimensionalArrayTrait
      *
      * @return array
      */
-    protected static function toArray(Translations $translations, $includeHeaders, $forceArray = false)
+    protected static function toArray(Translations $translations, $includeHeaders, $forceArray = false, $onlyMessages = false)
     {
         $pluralForm = $translations->getPluralForms();
         $pluralSize = is_array($pluralForm) ? ($pluralForm[0] - 1) : null;
@@ -56,11 +56,16 @@ trait MultidimensionalArrayTrait
             }
         }
 
-        return [
-            'domain' => $translations->getDomain(),
-            'plural-forms' => $translations->getHeader('Plural-Forms'),
-            'messages' => $messages,
-        ];
+        if(!$onlyMessages)
+        {
+            return [
+                'domain' => $translations->getDomain(),
+                'plural-forms' => $translations->getHeader('Plural-Forms'),
+                'messages' => $messages,
+            ];
+        }else{
+            return $messages[$context];
+        }
     }
 
     /**
